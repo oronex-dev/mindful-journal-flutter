@@ -1,78 +1,174 @@
-# Mindful Journal — CSE101
+<div align="center">
 
-An iOS-inspired personal journal for Fiel Mark Oronos CSE101 final project. The existing Flutter starter now includes a complete reflection → writing → reading flow with an indigo identity and an editorial writing surface.
+# Mindful Journal
+
+**A thoughtful space to write, reflect, and revisit your days.**
+
+A Flutter-powered personal journaling application with mood check-ins, rich writing tools, creative expression, and a customizable experience across screen sizes.
+
+**Flutter · Dart · Local-first storage · Responsive UI**
+
+[Explore Features](#features) · [App Preview](#app-preview) · [Run Locally](#run-locally) · [Technical Notes](#technical-notes)
+
+</div>
+
+---
+
+## Overview
+
+Mindful Journal brings reflection, writing, and reading into one cohesive experience. Its iOS-inspired interface pairs an indigo visual identity with a distraction-conscious editor, mood tracking, calendar history, and personal insights.
+
+The application is designed around **local-first journaling**: entries, media, preferences, and related information are saved on the device rather than requiring a hosted account or backend service.
+
+## App preview
+
+> **Screenshots are pending upload.** The images below are intended to be genuine captures of the running app, not promotional mockups. Add files with the exact names shown in the [screenshot checklist](#screenshot-checklist) to render them here.
+
+### Home and writing experience
+
+| Home | Journal editor |
+|:---:|:---:|
+| ![Mindful Journal home screen](docs/screenshots/home.png) | ![Mindful Journal editor](docs/screenshots/journal-editor.png) |
+
+### Reflection and personal history
+
+| Mood check-in | Calendar |
+|:---:|:---:|
+| ![Mood check-in](docs/screenshots/mood-check-in.png) | ![Journal calendar](docs/screenshots/calendar.png) |
+
+### Personalization and creative tools
+
+| Profile and themes | Drawing canvas |
+|:---:|:---:|
+| ![Profile and appearance settings](docs/screenshots/profile-themes.png) | ![Drawing canvas](docs/screenshots/drawing-canvas.png) |
 
 ## Features
 
-- Mood check-in with five labeled choices and preselected editor mood.
-- Create, read, edit, and confirmed deletion of journal entries.
-- Date picker, required title/body validation, word count, unsaved-change protection.
-- Chronological timeline grouped by month; useful empty states.
-- Editable saved name, tagline and circular photo preview; Home updates immediately.
-- Home / Journal / Calendar / Profile destinations, plus a separate global creation menu.
-- Honest writing streaks, linked calendar history and backdated writing.
-- Instant local search, mood/media/tag/Favorites filters and highlighted matches.
-- Animated editable checklists, saved Favorites and secondary Insights.
-- Up to four saved photos and two editable drawings per entry, with zoom previews.
-- Pen, Marker, Highlighter, Pencil and a working Eraser; drawing undo/redo and clear.
-- Eight accent themes plus a custom color picker, retaining System/Light/Dark.
-- Selected-text and typing formatting, text colors/highlights, undo/redo, formatted reading and Focus mode.
-- Live entry count, average mood, word total and most common mood; System/Light/Dark appearance.
-- Centered tablet layouts and desktop side navigation, accessible buttons and mood semantics.
-- Cmd/Ctrl+N on Home, Cmd/Ctrl+S in the editor, Escape to close with dirty-form protection.
-- Original generated journal icon and matching iOS launch mark.
+### Write and organize
+- Create, read, edit, and delete entries with confirmation before deletion.
+- Use date selection, required-field validation, word count, and unsaved-change protection.
+- Navigate a chronological journal timeline grouped by month.
+- Search locally and filter entries by mood, media, tags, and favorites.
+- Organize writing with collections, templates, and checklists.
 
-## Run and verify
+### Reflect and understand patterns
+- Choose from five labeled moods during check-in.
+- View writing streaks and related calendar history, including backdated entries.
+- See local insights such as entry count, average mood, total words, and most common mood.
 
-```sh
+### Make entries your own
+- Format text with styles, colors, and highlights; use undo/redo and Focus mode.
+- Attach up to four photos and two editable drawings to an entry, with zoom previews.
+- Draw using Pen, Marker, Highlighter, Pencil, and Eraser, with undo/redo and clear actions.
+- Personalize your profile, choose from eight accent themes or a custom color, and use System, Light, or Dark appearance.
+
+### Designed across devices
+- Responsive layouts for phones, tablets, and desktop-sized screens.
+- Dedicated Home, Journal, Calendar, and Profile areas.
+- Keyboard shortcuts: `Cmd/Ctrl + N` to create from Home, `Cmd/Ctrl + S` to save in the editor, and `Escape` to close with unsaved-change protection.
+- Accessible controls and labeled mood choices.
+
+## Technology
+
+| Area | Implementation |
+|---|---|
+| Application | Flutter, Dart |
+| Preferences | `shared_preferences` |
+| Local data and media | JSON records and app-owned files under the application documents directory via `path_provider` |
+| Media processing | Image validation and normalization before local storage |
+| Supported codebases | Android, iOS, macOS, and web project files; platform validation differs |
+| Verification | Flutter analysis, tests, and responsive widget checks |
+
+## Technical notes
+
+### Local persistence
+
+At startup, the app loads saved entries, tasks, checklists, favorites, tags, collections, profile details, and preferences. Changes queue serialized writes; journal-editor saves and quick check-ins wait for completion. An intentionally emptied journal remains empty after reopening rather than being repopulated with sample entries.
+
+For implementation details, see [Local Persistence Report](docs/LOCAL_PERSISTENCE_REPORT.md).
+
+### Project structure
+
+```text
+lib/
+├── app/           # Root state, startup hydration, themes
+├── core/          # Design tokens and shared utilities
+├── models/        # Journal-entry and mood models
+├── screens/       # Main screens, editor and reading flows
+└── widgets/       # Reusable controls and UI components
+
+test/              # Behavior and responsive-layout tests
+assets/images/     # App artwork
+scripts/ or tools/ # Optional local tooling (see repository)
+docs/              # Technical reports and guides
+```
+
+### Current platform and release status
+
+- An Android release APK build has been reported successful. **Physical-device installation and reopen testing still require confirmation** from the release checklist.
+- Responsive widget tests cover phone, tablet, desktop, landscape, and enlarged text scenarios.
+- The repository includes platform runners, but their presence alone is **not** evidence of release readiness on every platform.
+- Production distribution, store publication, and device acceptance are not claimed.
+
+See [Release Guide](docs/RELEASE_GUIDE.md), [Architecture](docs/ARCHITECTURE.md), and [Production Roadmap](docs/PRODUCTION_ROADMAP.md).
+
+## Run locally
+
+Install a compatible Flutter SDK and follow the repository's dependency configuration.
+
+```bash
 flutter pub get
 flutter run
+```
+
+Run checks:
+
+```bash
 flutter analyze
 flutter test
 ```
 
-Validated with Flutter 3.47.7 / Dart 3.13.5. `shared_preferences` stores profile and appearance preferences; `path_provider` locates the app's Application Documents Directory for JSON records and media. Selected photos keep the existing validation and 1024px normalization before being copied as PNG files into app-owned storage.
+The supplied project notes report verification with **Flutter 3.47.7 / Dart 3.13.5**. Results may differ across SDK versions and target platforms.
 
-## Local persistence
+## Screenshot checklist
 
-Startup loads saved entries, tasks, checklist state, favorites, tags, collection membership, profile and preferences before displaying the normal app. Mutations immediately queue serialized writes. Journal editor and quick check-in confirmation wait for the save to finish. Samples are inserted only when no saved journal or recovery file exists; an empty saved journal remains empty after reopening.
+Upload **real screenshots**, preferably captured from a simulator or device. Create a `docs/screenshots/` directory and use these exact filenames:
 
-See [local persistence implementation and verification](docs/LOCAL_PERSISTENCE_REPORT.md). This implementation supersedes the runtime-only descriptions in earlier assignment and implementation documents. UI layout and navigation remain unchanged.
+| Filename | Capture |
+|---|---|
+| `home.png` | Main Home screen with greeting and journal overview |
+| `journal-editor.png` | Writing editor with a sample entry |
+| `mood-check-in.png` | Five-choice mood selector |
+| `calendar.png` | Calendar with fictional journal history |
+| `profile-themes.png` | Profile and theme/personalization interface |
+| `drawing-canvas.png` | Working drawing editor or canvas |
 
-## Source map
+**Image guidance:** Use sample journal entries with invented names and text; never share personal journal content. Consistent portrait crops work best for mobile screenshots. The README image links render automatically once the files are committed at the referenced paths.
 
-- `lib/app/app.dart`: root state, startup hydration, persistence callbacks and themes.
-- `lib/models/journal_entry.dart`: entry and mood models, bundled examples.
-- `lib/core/`: design tokens and shared formatting/counting/sorting functions.
-- `lib/screens/`: onboarding, Home shell, editor, reading, timeline, Profile.
-- `lib/widgets/`: accessible mood selector and reusable canvas/cards/empty state.
-- `test/`: behavior and responsive-layout verification; optional screenshot capture.
-- `tools/generate_branding.py`: generate launcher/launch-image sizes from the approved master artwork.
+## Documentation
 
-## Platform status
+- [Local persistence implementation](docs/LOCAL_PERSISTENCE_REPORT.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Design system](docs/DESIGN_SYSTEM.md)
+- [Product experience](docs/PRODUCT_EXPERIENCE_REPORT.md)
+- [Settings and layout refinements](docs/SETTINGS_TASKS_VIEWS_REPORT.md)
+- [Release guide](docs/RELEASE_GUIDE.md)
+- [Production roadmap](docs/PRODUCTION_ROADMAP.md)
 
-The project includes Android, iOS and macOS runners. The Android release APK builds successfully at `build/app/outputs/flutter-apk/app-release.apk`. This validation ran on macOS without a connected Android device; an actual Android install/force-stop/reopen check remains a device acceptance step. The APK retains the existing signing configuration. Responsive widget checks exercise phone, tablet, desktop, landscape and enlarged text.
+Some older project reports describe earlier implementation stages; consult the latest persistence and release documentation for current behavior. Verify linked filenames against the actual repository before publishing.
 
-See [release steps](docs/RELEASE_GUIDE.md), [assignment mapping](docs/ASSIGNMENT_COMPLIANCE.md), [architecture](docs/ARCHITECTURE.md), [design system](docs/DESIGN_SYSTEM.md), [submission checklist](docs/SUBMISSION_GUIDE.md), and [future production roadmap](docs/PRODUCTION_ROADMAP.md).
+## Project ownership
 
-## Branding
+**Created and developed by Fiel Mark E. Oronos.**
 
-`assets/images/app_icon.png` is the final approved folded-leaf artwork, copied byte-for-byte from the supplied PNG. It is the single master source; do not draw, recolor or replace it. `flutter_launcher_icons` generates the iOS AppIcon catalog. The existing 80pt launch image is refreshed from the same source, with the storyboard and launch background preserved.
+This repository presents Mindful Journal as a software project and portfolio case study. It does not claim an app-store release or a commercial production deployment.
 
-```sh
-rtk proxy dart run flutter_launcher_icons
-# Or refresh AppIcon and the existing launch-image sizes together:
-rtk proxy python3 tools/generate_branding.py
-```
+---
 
-See [icon integration and refresh instructions](docs/ICON_INTEGRATION_REPORT.md). iOS is the only existing runner; Android/macOS/Windows/Web icon generation stays disabled until those runners are added and reviewed.
+<div align="center">
 
+**Made with Flutter · Designed for mindful everyday writing**
 
-## October 8 product experience pass
+[GitHub Profile](https://github.com/oronex-dev) · [Portfolio](https://oronex-dev.github.io/portfolio-fiel-mark/) · [Contact](mailto:oronosfielmark@gmail.com)
 
-See [Product experience report](docs/PRODUCT_EXPERIENCE_REPORT.md) for Today and memory logic, Prompt Packs, templates, collections, quick check-ins, writing preferences, Reflection Rings and wide Journal reading/editing panes. All additions are runtime-only; the existing single List of entries, media and rich formatting remain in place.
-
-
-## Settings, Tasks and layout refinement
-
-See [Settings, Tasks and layouts report](docs/SETTINGS_TASKS_VIEWS_REPORT.md) for the latest incremental upgrade, session clearing, legal placeholders and verification.
+</div>
