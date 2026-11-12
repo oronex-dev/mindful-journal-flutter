@@ -1,5 +1,9 @@
  <div align="center">
 
+<img src="docs/assets/mindful-journal-banner.png" alt="Mindful Journal — Slow down. Reflect. Grow." width="100%" />
+
+<br/>
+
 # Mindful Journal
 
 ### Slow down. Reflect. Grow.
